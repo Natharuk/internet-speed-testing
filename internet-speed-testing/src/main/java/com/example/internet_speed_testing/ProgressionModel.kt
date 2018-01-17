@@ -12,5 +12,6 @@ data class ProgressionModel(
         var uploadSpeed: BigDecimal = BigDecimal(0),
         var downloadSpeed: BigDecimal = BigDecimal(0),
         var downloadDuration: Long = 0L,
-        var uploadDuration: Long = 0L
+        var uploadDuration: Long = 0L,
+        var startTime: Long = 0L
 )
