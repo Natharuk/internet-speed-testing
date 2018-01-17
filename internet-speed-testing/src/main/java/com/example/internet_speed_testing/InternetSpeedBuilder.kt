@@ -95,6 +95,12 @@ class InternetSpeedBuilder(var activity: Activity) {
 
     inner class SpeedDownloadTestTask : AsyncTask<Void, Void, String>() {
 
+        override fun onPreExecute() {
+            super.onPreExecute()
+            javaListener.onDownloadProgress(countTestSpeed, progressModel)
+            javaListener.onTotalProgress(countTestSpeed, progressModel)
+        }
+
         override fun doInBackground(vararg params: Void): String? {
 
             val speedTestSocket = SpeedTestSocket()
@@ -133,6 +139,7 @@ class InternetSpeedBuilder(var activity: Activity) {
         progressModel.progressDownload = report.progressPercent
         progressModel.downloadSpeed = report.transferRateBit
         progressModel.downloadDuration = diffTime
+        progressModel.startTime = report.startTime
 
         activity.runOnUiThread {
             javaListener.onDownloadProgress(countTestSpeed, progressModel)
@@ -199,7 +206,7 @@ class InternetSpeedBuilder(var activity: Activity) {
         override fun doInBackground(vararg voids: Void): String? {
 
             try {
-                Ping.onAddress("www.baidu.com").setTimeOutMillis(1000).setTimes(5).doPing(object : Ping.PingListener {
+                Ping.onAddress("").setTimeOutMillis(1000).setTimes(3).doPing(object : Ping.PingListener {
                     override fun onResult(pingResult: PingResult) {
                         sendPingData(pingResult)
                         Log.e("onPing3 : ", "Ping" + pingResult.getTimeTaken())
