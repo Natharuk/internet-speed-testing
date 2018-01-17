@@ -22,6 +22,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
         if (dataList.size() <= position) {
             dataList.add(data);
+
             notifyItemInserted(position);
 
         } else {
@@ -79,7 +80,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
             String uploadMbps = String.format(format, uploadMegaBit);
 
 
-            Log.e("Mbps", "downloadSpeed" + progressionModel.getDownloadSpeed());
+            Log.e("time", "startTime" + progressionModel.getStartTime());
 
 //            String downloadSpeed = String.format(format, progressionModel.getDownloadSpeed().divide(postfixMultiplier));
 //            String uploadSpeed = String.format(format, progressionModel.getUploadSpeed().divide(postfixMultiplier));
@@ -91,7 +92,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MyViewHolder> {
 
             String ping = String.format("%.0f", progressionModel.getPingDuration());
 
-            tvNumber.setText("" + ++position);
+            tvNumber.setText("" + progressionModel.getStartTime());
             tvDownload.setText(downloadMbps + " Mbps/s\n" + downloadDuration + " s");
             tvUpload.setText(uploadMbps + " Mbps/s\n" + uploadDuration + " s");
             tvProgress.setText(ping);
